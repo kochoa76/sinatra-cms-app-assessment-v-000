@@ -1,3 +1,6 @@
 class User < ActiveRecord::Base
+  has_many :gifts
 
-end 
+  has_secure_password
+
+end
