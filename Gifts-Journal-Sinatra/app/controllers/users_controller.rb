@@ -30,7 +30,7 @@ class UsersController < ApplicationController
   end
 
   post '/login' do
-    user = User.find_by_id(username: params[:username])
+    user = User.find_by(username: params[:username])
     if user && user.authenticate(params[:password])
       session[:user_id]= user.id
       redirect to '/gifts'
@@ -44,7 +44,7 @@ class UsersController < ApplicationController
       session.destroy
       redirect to '/users/login'
     else
-      redirec to '/'
+      redirect to '/'
     end
   end
 
