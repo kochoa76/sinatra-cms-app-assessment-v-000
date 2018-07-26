@@ -1,7 +1,45 @@
-<p> Here are your gifts, <%= @user.username %>
+<h3><%= @user.username %>'s account Information</h3>
+<p>Username: <%=@user.username %></p>
+<% if logged_in? %>
+  <p> Email: <%= @user.email %></p>
+  <%end%>
+  <% if @user == current_user %>
+    <p><a href="/users/<%= @user.slug %>/edit">Edit</a></p>
+    <p><a href="/users/<%= @user.slug %>/delete">Delete</a></p>
+  <% end %>
+  <br></br>
+  <p><a href="/users/<%= @user.slug %>/gifts"> <%= @user.username %>'s Gifts<a/></p>
+  <p><a href="/gifts">All Gifts</a></p>
+  <p><a href="/">Home</a></p>
+  <% if !logged_in? %>
+    <p><a href="/users/login">Log In</a></p>
+  <% else %>
+    <p><a href="/users/logout">Log Out</a></p>
+  <% end %>
+
 <% @user.gifts.each do |gift| %>
   <div>
     <%= gift.name %>
-    <%= gift.description %> 
+    <%= gift.description %>
   </div>
+<% end %>
+
+<h1><%=@user.username%>'s page</h1>
+<p>Username: <%= @user.username %></p>
+<% if logged_in? %>
+  <p>Email: <%= @user.email %></p>
+<% end %>
+<% if @user == current_user %>
+  <p><a href="/users/<%= @user.slug %>/edit">Edit</a></p>
+  <p><a href="/users/<%= @user.slug %>/delete">Delete</a></p>
+<% end %>
+
+<br></br>
+<p><a href="/users/<%= @user.slug %>/recipes"> <%= @user.username %>'s Recipes<a/></p>
+<p><a href="/recipes">All recipes</a></p>
+<p><a href="/">Home</a></p>
+<% if !logged_in? %>
+  <p><a href="/login">Log In</a></p>
+<% else %>
+  <p><a href="/logout">Log Out</a></p>
 <% end %>

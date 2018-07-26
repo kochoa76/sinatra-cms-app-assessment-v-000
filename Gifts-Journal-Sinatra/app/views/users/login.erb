@@ -1,8 +1,11 @@
 <h2>Login to your Account</h2>
 <form method="post" action="/login">
-  <input type="text" name="username" placeholder="Username:">
+  <p><label for="user[:username]"><input type="text" name="user[username]" placeholder="Username:">
   <br></br>
-  <input type="password" name="password" placeholder="Password:">
+  <p><label for="password"><input type="password" name="user[password]" placeholder="Password:">
   <br></br>
-  <input type="submit" value="Log In">
+  <button type="submit" value="submit" name="submit">Log In</button>
 </form>
+
+<p><a href="/user/create_user">Sign Up</a></p>
+<p><a href="/">Home</a></p>

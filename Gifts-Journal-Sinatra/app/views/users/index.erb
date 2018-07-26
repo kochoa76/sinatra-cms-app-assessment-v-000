@@ -1,0 +1,14 @@
+<h1>List of Gift Journal Users</h1>
+<% @users.each do |user| %>
+<ul>
+  <a href="/users/<%= user.slug %>"><%= user.username %></a>
+</ul>
+<% end %>
+<br></br>
+<p><a href="/gifts/create_gift">Add Gift</a></p>
+<p><a href="/">Home</a></p>
+<% if !logged_in? %>
+  <p><a href="/users/login">Log In</a></p>
+<% else %>
+  <p><a href="/users/logout">Log Out</a></p>
+<% end %>

@@ -9,7 +9,8 @@ class UsersController < ApplicationController
     if !logged_in?
        erb :'users/create_user', locals: {message: "Please sign up before you sign in"}
      else
-       redirect to '/gifts/gifts'
+       flash[:message] = "You need to login to view users."
+       redirect to '/'
      end
 
     erb :'users/create_user'
@@ -17,11 +18,13 @@ class UsersController < ApplicationController
 
   post '/create_user' do
     if params[:username]== "" || params[:email]== "" || params[:password]== ""
+      flash[:message] = "Please, fill in all the boxes."
       redirect to 'users/create_user'
     else
       @user = User.create(username: params[:username], email: params[:email], password: params[:password])
       @user.save
       session[:user_id]= @user.id
+       flash[:message] = "You have successfully signed up."
       redirect to '/gifts/gifts'
     end
   end

@@ -5,8 +5,11 @@
 <% end %>
 
 <form action="/create_user" method="POST">
-  <p>Name: <input type="text" name="username"></p>
-  <p>Email: <input type="text" name="email"></p>
-  <p>Password: <input type="password" name="password"></p>
+  <p>Name: <input type="text" name="user[username]"></p>
+  <p>Email: <input type="text" name="user[email]"></p>
+  <p>Password: <input type="password" name="user[password]"></p>
   <input type="submit" value="Create Account">
 </form>
+
+<p><a href="/login">Log In</a></p>
+<p><a href="/">Home</a></p>

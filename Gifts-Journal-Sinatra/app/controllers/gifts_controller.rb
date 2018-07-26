@@ -20,12 +20,15 @@ class GiftsController < ApplicationController
   post '/gifts' do
     if logged_in?
       if params[:name] == "" || params[:description] == ""
+        flash[:message] = "Please, fill in all the boxes."
         redirect to '/gifts/create_gift'
       else
-        @gift = current_user.gifts.create(params[:gift])
+        @gift = current_user.gifts.create(name: params[:name], description: params[:description])
         if @gift.save
+           flash[:message] = "You have successfully added a gift"
           redirect to "/gifts/#{@gift.id}"
         else
+           flash[:message] = "Gift name already exists. Please, choose a different name."
           redirect to '/gifts/create_gift'
         end
       end
@@ -78,17 +81,20 @@ class GiftsController < ApplicationController
   end
 
 
-  get '/gifts/:id/delete' do
+  delete '/gifts/:id/delete' do
     if logged_in?
      @gift = Gift.find_by_id(params[:id])
      if @gift && @gift.user == current_user
        @gift.delete
+        flash[:message] = "You have successfully deleted your recipe."
      end
      redirect to '/gifts'
    else
+     flash[:message] = "You cannot delete other user's recipe."
      redirect to '/users/login'
    end
  end
+
 
 
 
