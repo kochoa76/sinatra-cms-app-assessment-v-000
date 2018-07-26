@@ -4,18 +4,19 @@
     <h2>Welcome to Gift Journal!</h2>
     <div class="content">
       <p> Gift Journal allows you to keep track of your desired gifts or wishes, much like a journal, and share your list with others!</p>
-      <p>Please signin or signup below:</p>
+      <p>Please see your options below to get started:</p>
       <nav>
       <% if logged_in? %>
-
-        <a href="/tweets/new"> Create Tweet </a>
+      <p>Welcome, <%=current_user.username %></p>
+        <a href="/tweets/new"> Go to your Gift Journal </a>
+        <br></br>
         <a href="/logout"> Log Out </a>
-        <p>Welcome, <%=current_user.username %></p>
+
 
       <% else %>
-        <a href="/login"> Sign In </a>
+        <a href="/login"> Log In </a>
         <br></br>
-        <a href="/signup">Sign Up</a>
+        <a href="/signup">Create Account</a>
 
       <%end %>
 
