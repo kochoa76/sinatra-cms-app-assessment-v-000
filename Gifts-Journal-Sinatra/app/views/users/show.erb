@@ -1,0 +1,7 @@
+<p> Here are your gifts, <%= @user.username %>
+<% @user.gifts.each do |gift| %>
+  <div>
+    <%= gift.name %>
+    <%= gift.description %> 
+  </div>
+<% end %>

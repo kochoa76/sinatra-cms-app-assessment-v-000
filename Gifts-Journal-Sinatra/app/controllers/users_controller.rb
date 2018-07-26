@@ -1,5 +1,10 @@
 class UsersController < ApplicationController
 
+  get '/users/:slug' do
+   @user =User.find_by_slug(params[:slug])
+   erb :'users/show'
+ end
+
   get '/create_user' do
     if !logged_in?
        erb :'users/create_user', locals: {message: "Please sign up before you sign in"}

@@ -22,7 +22,7 @@ class GiftsController < ApplicationController
       if params[:name] == "" || params[:description] == ""
         redirect to '/gifts/create_gift'
       else
-        @gift= current_user.gifts.build(name: params[:name], description: params[:description])
+        @gift = current_user.gifts.create(params[:gift])
         if @gift.save
           redirect to "/gifts/#{@gift.id}"
         else
@@ -36,7 +36,7 @@ class GiftsController < ApplicationController
 
   get '/gifts/:id' do
     if logged_in?
-      @gift = Gift.find_by(params[:id])
+      @gift = Gift.find_by_id(params[:id])
       erb :'/gifts/show_gift'
     else
       redirect to '/users/login'
