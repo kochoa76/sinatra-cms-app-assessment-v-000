@@ -8,7 +8,7 @@
       <nav>
       <% if logged_in? %>
       <p>Welcome, <%=current_user.username %></p>
-        <a href="/tweets/new"> Go to your Gift Journal </a>
+        <a href="/gifts"> Go to your Gift Journal </a>
         <br></br>
         <a href="/logout"> Log Out </a>
 
@@ -16,7 +16,7 @@
       <% else %>
         <a href="/login"> Log In </a>
         <br></br>
-        <a href="/signup">Create Account</a>
+        <a href="/create_user">Create Account</a>
 
       <%end %>
 
