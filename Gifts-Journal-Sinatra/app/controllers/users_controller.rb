@@ -26,7 +26,7 @@ class UsersController < ApplicationController
 
 
   post '/users' do
-    if params [:user][:username]== "" || params[:user][:email]== "" || params[:user][:password]== ""
+    if params[:user][:username]== "" || params[:user][:email]== "" || params[:user][:password]== ""
       flash[:message] = "Please, fill in all the boxes."
       redirect to '/signup'
     else
@@ -81,7 +81,7 @@ class UsersController < ApplicationController
 
     get '/logout' do
       if logged_in?
-        session.destroy 
+        session.destroy
       redirect to '/login'
       else
         redirect to '/'

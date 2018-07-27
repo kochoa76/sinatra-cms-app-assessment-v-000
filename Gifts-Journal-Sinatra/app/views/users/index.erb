@@ -5,7 +5,7 @@
 </ul>
 <% end %>
 <br></br>
-<p><a href="/gifts/create_gift">Add Gift</a></p>
+<p><a href="/users/<%=current_user.slug%>/gifts">Go To My Gift Journal</a></p>
 <p><a href="/">Home</a></p>
 <% if !logged_in? %>
   <p><a href="/users/login">Log In</a></p>
