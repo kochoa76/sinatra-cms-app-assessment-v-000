@@ -8,15 +8,15 @@
       <nav>
       <% if logged_in? %>
       <p>Welcome, <%=current_user.username %></p>
-        <a href="/gifts"> Go to your Gift Journal </a>
-        <br></br>
-        <a href="/logout"> Log Out </a>
+        <p><a href="/users/mygifts"> Go to your Gift Journal </a></p>
+        <p><a href="/gifts">All Gifts</a></p>
+        <p><a href="/logout"> Log Out </a><p>
 
 
       <% else %>
         <a href="/login"> Log In </a>
         <br></br>
-        <a href="/create_user">Create Account</a>
+        <a href="/users/create_user">Create Account</a>
 
       <%end %>
 
