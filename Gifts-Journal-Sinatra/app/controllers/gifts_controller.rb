@@ -5,12 +5,13 @@ class GiftsController < ApplicationController
     if logged_in?
       erb :'/gifts/create_gift'
     else
-      erb :'/users/login'
+      erb :login
     end
   end
 
   get '/users/:slug/gifts' do
     @user = User.find_by_slug(params[:slug])
+    @gifts= Gift.all
       erb :'/users/mygifts'
     end
 
@@ -66,16 +67,16 @@ class GiftsController < ApplicationController
     end
   end
 
-  patch '/gifts/:slug' do
+  patch "/gifts/:slug" do
     if logged_in?
       if params[:gift][:name] = "" || params[:gift][:description] = ""
         redirect to "/gifts/#{params[:slug]}/edit"
       else
         @gift = Gift.find_by_slug(params[:slug])
         if @gift && @gift.user == current_user
-          if @gift.update(params[:gift][:name], params[:gift][:description])
-            redirect to "/gifts/#{@gift.slug}"
+          if @gift.update(name: params[:gift][:name], description: params[:gift][:description])
             flash[:message] = "You have successfully edited your recipe."
+            redirect to "/gifts/#{@gift.slug}"
           else
             redirect to "gifts/#{@gift.slug}/edit"
          end
@@ -97,7 +98,7 @@ class GiftsController < ApplicationController
        @gift.destroy
         flash[:message] = "You have successfully deleted your gift."
      end
-     redirect to '/gifts'
+     redirect to "/users/#{current_user.slug}/gifts"
    else
      flash[:message] = "You do not have permission to delete another user's gift."
      redirect to '/login'

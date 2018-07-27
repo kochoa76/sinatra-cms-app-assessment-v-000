@@ -1,5 +1,5 @@
 
-<h1>Your Gift Journal:</h1>
+<h1>All Gifts:</h1>
 <% @gifts.each do |gift| %>
   <ul>
     <a href="/gifts/<%= gift.slug %>"><%=gift.name %></a> by <a href="/users/<%= gift.user.slug %>"><%=gift.user.username if gift.user%></a>

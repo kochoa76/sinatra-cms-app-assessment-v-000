@@ -62,7 +62,7 @@ class UsersController < ApplicationController
 
     get '/login' do
       if !logged_in?
-        erb :"/users/login"
+        erb :login
       else
         redirect to '/users'
       end
@@ -80,14 +80,14 @@ class UsersController < ApplicationController
     end
 
     get '/logout' do
-
       if logged_in?
-        session.destroy
-        redirect to '/login'
+        session.destroy 
+      redirect to '/login'
       else
         redirect to '/'
       end
     end
+
 
     get '/users/:slug/delete' do
       if logged_in?

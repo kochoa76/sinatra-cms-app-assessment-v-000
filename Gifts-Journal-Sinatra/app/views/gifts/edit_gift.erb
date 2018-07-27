@@ -1,12 +1,13 @@
 <h2> Edit Gift </h2>
 
-<form method="post" action="/gifts/<%=@gift.slug%>">
-  <p><input id="hidden" type="hidden" name="_method" value="PATCH"></p>
-  <p><input type="text" name="gift[name]" value="<%= @gift.name %>"></p>
-  <p><input type="text" name="gift[description]" value="<%= @gift.description %>"></p>
-  <p><input type="submit" value="Edit Gift"></p>
+<form method="POST" action="/gifts/<%=@gift.slug%>">
+  <p><input type="hidden" name="_method" value="PATCH"></p>
+  <p>Name:<input type="text" name="gift[name]" value="<%= @gift.name %>"></p>
+  <p>Description:<input type="text" name="gift[description]" value="<%= @gift.description %>"></p>
+  <p><input type="submit" name="submit" value="Edit Gift"></p>
 </form>
 
 <br></br>
 <p><a href="/logout">Log Out</a></p>
+<p><a href="/users/<%= current_user.slug %>/gifts"> Back to My Gift Journal </a>
 <p><a href="/">Home</a></p>
