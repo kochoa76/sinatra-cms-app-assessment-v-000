@@ -13,7 +13,7 @@ class UsersController < ApplicationController
 
   get '/signup' do
     if !logged_in?
-       erb :'users/create_user', locals: {message: "Please sign up before you sign in"}
+       erb :'users/create_user'
      else
        redirect to '/users'
      end
@@ -23,7 +23,6 @@ class UsersController < ApplicationController
    @user =User.find_by_slug(params[:slug])
    erb :'users/show'
  end
-
 
   post '/users' do
     if params[:user][:username]== "" || params[:user][:email]== "" || params[:user][:password]== ""
@@ -37,6 +36,25 @@ class UsersController < ApplicationController
       redirect to '/users'
     end
   end
+
+  get '/login' do
+    if !logged_in?
+   erb :'users/login'
+ else
+   redirect '/users'
+ end
+end
+
+post '/login' do
+  user = User.find_by(username: params[:user][:username])
+  if user && user.authenticate(params[:user][:password])
+    session[:user_id]= user.id
+    redirect to '/users/#{user.slug}'
+  else
+    flash[:message]= "You have entered an incorrect username/password or have not yet signed up."
+    redirect to '/signup'
+  end
+end
 
     get '/users/:slug/edit' do
       if logged_in?
@@ -60,34 +78,14 @@ class UsersController < ApplicationController
         redirect to '/users/#{@user.slug}'
       end
 
-    get '/login' do
-      if !logged_in?
-        erb :login
-      else
-        redirect to '/users'
-      end
-    end
-
-    post '/login' do
-      user = User.find_by(username: params[:user][:username])
-      if user && user.authenticate(params[:user][:password])
-        session[:user_id]= user.id
-        redirect to '/users/#{user.slug}'
-      else
-        flash[:message]= "You have entered an incorrect username/password or have not yet signed up."
-        redirect to '/signup'
-      end
-    end
-
     get '/logout' do
       if logged_in?
         session.destroy
-      redirect to '/login'
+        redirect to '/login'
       else
         redirect to '/'
       end
     end
-
 
     get '/users/:slug/delete' do
       if logged_in?

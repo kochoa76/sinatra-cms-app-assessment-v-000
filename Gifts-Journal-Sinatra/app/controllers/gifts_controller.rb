@@ -18,6 +18,8 @@ class GiftsController < ApplicationController
   get '/gifts' do
     if logged_in?
       @gifts = Gift.all
+      @gift = Gift.find_by_slug(params[:slug])
+      @user =@gift.user
          erb :'/gifts/index'
     else
         redirect to '/login'
@@ -96,7 +98,7 @@ class GiftsController < ApplicationController
      @gift = Gift.find_by_slug(params[:slug])
      if @gift && @gift.user == current_user
        @gift.destroy
-        flash[:message] = "You have successfully deleted your gift."
+        flash.next[:message] = "You have successfully deleted your gift."
      end
      redirect to "/users/#{current_user.slug}/gifts"
    else
