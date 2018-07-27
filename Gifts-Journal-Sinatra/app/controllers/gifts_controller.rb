@@ -1,97 +1,106 @@
 class GiftsController < ApplicationController
 
-  get '/gifts' do
-    if logged_in?
-       @gifts = Gift.all
-       erb :'/gifts/gifts'
-     else
-       redirect to '/login'
-     end
-   end
 
   get '/gifts/create_gift' do
     if logged_in?
       erb :'/gifts/create_gift'
     else
-      erb :'/users/login'
+      erb :'/login'
     end
+  end
+
+  get '/users/:slug/gifts' do
+    @user = User.find_by_slug(params[:slug])
+      erb :'/users/mygifts'
+    end
+
+  get '/gifts' do
+    if logged_in?
+      @gifts = Gift.all
+         erb :'/gifts/index'
+    else
+        redirect to '/login'
+     end
   end
 
   post '/gifts' do
     if logged_in?
-      if params[:name] == "" || params[:description] == ""
-        flash[:message] = "Please, fill in all the boxes."
+      if params[:gift][:name] == "" || params[:gift][:description] == ""
+        flash[:message] = "Please fill all the boxes."
         redirect to '/gifts/create_gift'
       else
-        @gift = current_user.gifts.create(name: params[:name], description: params[:description])
+        @gift = current_user.gifts.build(name: params[:gift][:name], description: params[:gift][:description])
         if @gift.save
            flash[:message] = "You have successfully added a gift"
-          redirect to "/gifts/#{@gift.id}"
+          redirect to "/gifts/#{@gift.slug}"
         else
-           flash[:message] = "Gift name already exists. Please, choose a different name."
+           flash[:message] = "Gift has already been added, please choose a different name."
           redirect to '/gifts/create_gift'
         end
       end
     else
-      redirect to '/users/login'
+      redirect to '/login'
     end
   end
 
-  get '/gifts/:id' do
+  get '/gifts/:slug' do
     if logged_in?
-      @gift = Gift.find_by_id(params[:id])
+      @gift = Gift.find_by_slug(params[:slug])
+      @user = @gift.user
       erb :'/gifts/show_gift'
     else
-      redirect to '/users/login'
+      redirect to '/login'
     end
   end
 
-  get '/gifts/:id/edit' do
+  get '/gifts/:slug/edit' do
     if logged_in?
-      @gift = Gift.find_by_id(params[:id])
+      @gift = Gift.find_by_slug(params[:slug])
       if @gift && @gift.user = current_user
         erb :'gifts/edit_gift'
       else
         redirect to '/gifts'
       end
     else
-      redirect to '/users/login'
+      redirect to '/login'
     end
   end
 
-  patch '/gifts/:id' do
+  patch '/gifts/:slug' do
     if logged_in?
-      if params[:name] = "" || params[:description] = ""
-        redirec to "/gifts/#{params[:id]}/edit"
+      if params[:gift][:name] = "" || params[:gift][:description] = ""
+        redirect to "/gifts/#{params[:slug]}/edit"
       else
-        @gift = Gift.find_by_id(params[:id])
+        @gift = Gift.find_by_slug(params[:slug])
         if @gift && @gift.user == current_user
-          if @gift.update(params[:name], params[:description])
-            redirect to "/gifts/#{@gift.id}"
+          if @gift.update(params[:gift][:name], params[:gift][:description])
+            redirect to "/gifts/#{@gift.slug}"
+            flash[:message] = "You have successfully edited your recipe."
           else
-            redirect to "gifts/#{@gift.id}/edit"
+            redirect to "gifts/#{@gift.slug}/edit"
          end
         else
           redirect to '/gifts'
          end
        end
     else
-      redirect to '/users/login'
+      flash[:message] = "Gift name has already been added, please choose a different name."
+      redirect to '/login'
     end
   end
 
 
-  delete '/gifts/:id/delete' do
+  delete '/gifts/:slug/delete' do
     if logged_in?
-     @gift = Gift.find_by_id(params[:id])
+     @gift = Gift.find_by_slug(params[:slug])
      if @gift && @gift.user == current_user
-       @gift.delete
-        flash[:message] = "You have successfully deleted your recipe."
+       @gift.destroy
+        flash[:message] = "You have successfully deleted your gift."
      end
      redirect to '/gifts'
    else
-     flash[:message] = "You cannot delete other user's recipe."
-     redirect to '/users/login'
+     flash[:message] = "You do not have permission to delete another user's gift."
+     redirect to '/login'
    end
  end
 

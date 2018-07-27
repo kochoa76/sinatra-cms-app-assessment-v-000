@@ -1,14 +1,20 @@
 
+<h1><%=@user.username%>'s Gifts:</h1>
+<p><%= @gift.name %></p>
+<p><%= @gift.description %></p>
 
-<h3><%= @gift.name %></h3>
-<h3><%= @gift.description %></h3>
 
-
-<form method="POST" action="/gifts/<%=@gift.id%>/delete">
+<form method="POST" action="/gifts/<%=@gift.slug%>/delete">
   <input id="hidden" type="hidden" name="_method" value="DELETE">
   <input type="submit" value="Delete Gift">
 </form>
 
-<a href="/gifts/<%=@gift.id%>/edit">Edit Gift </a>
+<% if !logged_in? %>
+  <p><a href="/login">Log In</a></p>
+<% else %>
+  <p><a href="/logout">Log Out</a></p>
+<% end %>
+
+<a href="/gifts/<%=@gift.slug%>/edit">Edit Gift </a>
 <br></br>
 <a href="/gifts"> Back to Gift Journal </a>

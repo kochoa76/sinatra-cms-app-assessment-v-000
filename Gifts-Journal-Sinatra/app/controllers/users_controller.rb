@@ -84,7 +84,7 @@ class UsersController < ApplicationController
     get '/logout' do
       if logged_in?
         session.destroy
-        redirect to '/login'
+        redirect to '/users/login'
       else
         redirect to '/'
       end
@@ -106,6 +106,6 @@ class UsersController < ApplicationController
       redirect to '/login'
     end
   end
-end 
+end
 
 end
