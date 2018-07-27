@@ -15,11 +15,9 @@ class UsersController < ApplicationController
     if !logged_in?
        erb :'users/create_user', locals: {message: "Please sign up before you sign in"}
      else
-       flash[:message] = "You need to login to view users."
        redirect to '/users'
      end
-    erb :'users/create_user'
-  end
+   end
 
   get '/users/:slug' do
    @user =User.find_by_slug(params[:slug])
@@ -44,7 +42,7 @@ class UsersController < ApplicationController
       if logged_in?
         @user = User.find_by_slug(params[:slug])
         if @user = current_user
-          erb :'/users/edit'
+          erb :"/users/edit"
         else
           flash[:message] = "You do not have permission to edit someone else's profile"
           redirect to '/users'
@@ -57,14 +55,14 @@ class UsersController < ApplicationController
     patch '/users/:slug/edit' do
       if logged_in?
         @user = User.find_by_slug(params[:slug])
-        @user.update(username: params[:user][:username], email: params[:user][:username], password: [:user][:password])
+        @user.update(username: params[:user][:username], email: params[:user][:email], password: [:user][:password])
         flash[:message]= "You have successfully updated your profile"
         redirect to '/users/#{@user.slug}'
       end
 
     get '/login' do
       if !logged_in?
-        erb :'/users/login'
+        erb :"/users/login"
       else
         redirect to '/users'
       end
@@ -81,11 +79,11 @@ class UsersController < ApplicationController
       end
     end
 
-    get '/users/logout' do
+    get '/logout' do
 
       if logged_in?
         session.destroy
-        redirect to '/users/login'
+        redirect to '/login'
       else
         redirect to '/'
       end

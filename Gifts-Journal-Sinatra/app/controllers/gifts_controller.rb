@@ -5,7 +5,7 @@ class GiftsController < ApplicationController
     if logged_in?
       erb :'/gifts/create_gift'
     else
-      erb :'/login'
+      erb :'/users/login'
     end
   end
 
