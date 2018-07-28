@@ -1,4 +1,4 @@
-<h3><%= @user.username %>'s account Information</h3>
+<h3><%=current_user.username %>'s account Information</h3>
 <p>Username: <%=@user.username %></p>
 <% if logged_in? %>
   <p> Email: <%= @user.email %></p>
