@@ -67,12 +67,13 @@ class GiftsController < ApplicationController
 
   patch "/gifts/:slug" do
     if logged_in?
-      if params[:gift][:name] = "" || params[:gift][:description] = ""
+      if params[:gift][:name] == "" || params[:gift][:description] == ""
         redirect to "/gifts/#{params[:slug]}/edit"
       else
         @gift = Gift.find_by_slug(params[:slug])
         if @gift && @gift.user == current_user
           if @gift.update(name: params[:gift][:name], description: params[:gift][:description])
+            @gift.save
             flash[:message] = "You have successfully edited your recipe."
             redirect to "/gifts/#{@gift.slug}"
           else
@@ -88,12 +89,12 @@ class GiftsController < ApplicationController
     end
   end
 
-  delete '/gifts/:slug/delete' do
+  get '/gifts/:slug/delete' do
     if logged_in?
      @gift = Gift.find_by_slug(params[:slug])
      if @gift && @gift.user == current_user
        @gift.destroy
-        flash.next[:message] = "You have successfully deleted your gift."
+        flash[:message] = "You have successfully deleted your gift."
      end
      redirect to "/users/#{current_user.slug}/gifts"
    else

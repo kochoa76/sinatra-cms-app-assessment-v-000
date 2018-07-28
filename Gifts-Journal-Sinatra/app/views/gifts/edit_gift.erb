@@ -1,8 +1,8 @@
 <h2> Edit Gift </h2>
 
-<form method="POST" action="/gifts/<%= @gift.slug %>">
+<form action="/gifts/<%= @gift.slug %>" method="POST">
   <p>
-    <input id="hidden" type="hidden" name="_method" value="PATCH">
+    <input type="hidden" name="_method" value="PATCH">
   </p>
   <p>Name:
     <input type="text" name="gift[name]" value="<%= @gift.name %>">
@@ -10,9 +10,9 @@
   <p>Description:
     <input type="text" name="gift[description]" value="<%= @gift.description %>">
   </p>
-  <p><input type="submit" name="submit" value="Update Gift">
-  </p>
+  <p><input type="submit" value="Update Gift"></p>
 </form>
+
 
 <br></br>
 <p><a href="/logout">Log Out</a></p>
