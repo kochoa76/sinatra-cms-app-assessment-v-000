@@ -30,7 +30,7 @@ class GiftsController < ApplicationController
     if logged_in?
       if params[:gift][:name] == "" || params[:gift][:description] == ""
         flash[:message] = "Please fill all the boxes."
-        redirect to '/gifts/create_gift'
+        redirect to "/gifts/create_gift"
       else
         @gift = current_user.gifts.build(name: params[:gift][:name], description: params[:gift][:description])
         if @gift.save
@@ -38,7 +38,7 @@ class GiftsController < ApplicationController
           redirect to "/gifts/#{@gift.slug}"
         else
            flash[:message] = "Gift has already been added, please choose a different name."
-          redirect to '/gifts/create_gift'
+          redirect to "/gifts/create_gift"
         end
       end
     else

@@ -15,11 +15,11 @@ class UsersController < ApplicationController
       if !logged_in?
          erb :'users/create_user'
        else
-         redirect to '/users'
+         redirect to '/users/'
        end
      end
 
-    post '/users' do
+    post '/users/' do
       if params[:user][:username]== "" || params[:user][:email]== "" || params[:user][:password]== ""
         flash[:message] = "Please, fill in all the boxes."
         redirect to '/signup'
@@ -28,7 +28,7 @@ class UsersController < ApplicationController
         @user.save
         session[:user_id]= @user.id
          flash[:message] = "You have successfully signed up."
-        redirect to '/users'
+        redirect to "/users/"
       end
     end
 
