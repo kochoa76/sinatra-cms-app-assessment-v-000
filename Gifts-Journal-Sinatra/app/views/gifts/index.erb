@@ -1,8 +1,10 @@
-
+require 'pry'
 <h1>All Gifts:</h1>
 <% @gifts.each do |gift| %>
+binding.pry
   <ul>
     <a href="/gifts/<%= gift.slug %>"><%= gift.name %></a> by <a href="/users/<%= @user.slug %>"><%= @user.username if @user %></a>
+
   </ul>
 <% end %>
 

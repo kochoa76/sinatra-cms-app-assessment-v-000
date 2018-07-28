@@ -11,8 +11,9 @@
          <% else %>
            <p>Welcome, <%= current_user.username %>!</p>
            <p><a href="/users/<%= current_user.slug %>/gifts">Go To My Journal</a></p>
+           <p><a href="/users/<%=current_user.slug%>"> Go To My Account </a></p>
            <p><a href="/gifts">All Gifts</a></p>
-           <p><a href="/users">All Users</a></p>
+           <p><a href="/users/">All Users</a></p>
            <p><a href="/logout">Log Out</a></p>
          <% end %>
        </div>

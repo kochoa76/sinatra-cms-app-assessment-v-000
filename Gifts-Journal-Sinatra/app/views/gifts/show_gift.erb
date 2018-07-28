@@ -24,6 +24,7 @@
 <p>Description: <%= @gift.description %></p>
 <p><a href="/gifts/<%= @gift.slug %>/edit">Edit</a></p>
 <p><a href="/gifts/<%= @gift.slug %>/delete">Delete</a></p>
+<p><a href="/users/<%=current_user.slug%>/gifts"> Back to My Journal </a></p>
 <br></br>
 <p><a href="/gifts/create_gift">Add Gift</a></p>
 <p><a href="/gifts">All Gifts</a></p>
