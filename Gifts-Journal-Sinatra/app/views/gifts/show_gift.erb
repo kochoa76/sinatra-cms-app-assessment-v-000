@@ -1,8 +1,7 @@
 
-<h1><%=@user.username%>'s Gifts:</h1>
-<p><%= @gift.name %></p>
-<p><%= @gift.description %></p>
-
+<!-- <h1><%=@user.username%>'s Gifts:</h1>
+<p>Name: <%= @gift.name %></p>
+<p>Description:<%= @gift.description %></p>
 
 <form method="POST" action="/gifts/<%=@gift.slug%>/delete">
   <input id="hidden" type="hidden" name="_method" value="DELETE">
@@ -17,4 +16,20 @@
 
 <a href="/gifts/<%=@gift.slug%>/edit">Edit Gift </a>
 <br></br>
-<a href="/users/<%= current_user.slug %>/gifts"> Back to Gift Journal </a>
+<a href="/users/<%= current_user.slug %>/gifts"> Back to Gift Journal </a> -->
+
+<h1><%=@user.username%>'s Gifts:</h1>
+
+<p>Name: <%= @gift.name %></p>
+<p>Description: <%= @gift.description %></p>
+<p><a href="/gifts/<%= @gift.slug %>/edit">Edit</a></p>
+<p><a href="/gifts/<%= @gift.slug %>/delete">Delete</a></p>
+<br></br>
+<p><a href="/gifts/create_gift">Add Gift</a></p>
+<p><a href="/gifts">All Gifts</a></p>
+<p><a href="/">Home</a></p>
+<% if !logged_in? %>
+  <p><a href="/login">Log In</a></p>
+<% else %>
+  <p><a href="/logout">Log Out</a></p>
+<% end %>

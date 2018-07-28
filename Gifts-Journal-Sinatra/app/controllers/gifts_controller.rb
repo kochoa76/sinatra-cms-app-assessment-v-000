@@ -46,21 +46,17 @@ class GiftsController < ApplicationController
     end
   end
 
-  get '/gifts/:slug' do
-    if logged_in?
+  get "/gifts/:slug" do
       @gift = Gift.find_by_slug(params[:slug])
       @user = @gift.user
-      erb :'/gifts/show_gift'
-    else
-      redirect to '/login'
-    end
+      erb :"/gifts/show_gift"
   end
 
-  get '/gifts/:slug/edit' do
+  get "/gifts/:slug/edit" do
     if logged_in?
       @gift = Gift.find_by_slug(params[:slug])
-      if @gift && @gift.user = current_user
-        erb :'gifts/edit_gift'
+      if @gift && @gift.user == current_user
+        erb :"gifts/edit_gift"
       else
         redirect to '/gifts'
       end
@@ -88,10 +84,9 @@ class GiftsController < ApplicationController
        end
     else
       flash[:message] = "Gift name has already been added, please choose a different name."
-      redirect to '/login'
+      redirect to "/login"
     end
   end
-
 
   delete '/gifts/:slug/delete' do
     if logged_in?

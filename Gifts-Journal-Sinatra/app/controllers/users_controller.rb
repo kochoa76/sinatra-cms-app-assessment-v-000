@@ -94,7 +94,7 @@ class UsersController < ApplicationController
         @user.destroy
         session.clear
         flash[:message] = "You have successfully deleted your account"
-        redirect to '/users'
+        redirect to "/users/"
       else
         flash[:message] = "You do not have permission to delete another user's account"
       end
