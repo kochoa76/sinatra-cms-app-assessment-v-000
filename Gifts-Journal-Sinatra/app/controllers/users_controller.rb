@@ -44,7 +44,7 @@ class UsersController < ApplicationController
       @user = User.find_by(username: params[:user][:username])
       if @user && @user.authenticate(params[:user][:password])
         session[:user_id]= @user.id
-        redirect to '/users/#{@user.slug}'
+        redirect to "/users/#{@user.slug}"
       else
         flash[:message]= "You have entered an incorrect username/password or have not yet signed up."
         redirect to '/signup'

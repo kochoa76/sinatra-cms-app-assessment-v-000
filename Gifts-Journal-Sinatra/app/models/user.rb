@@ -1,6 +1,5 @@
 class User < ActiveRecord::Base
   has_many :gifts
-
   has_secure_password
   validates_presence_of :username
   validates_uniqueness_of :username
@@ -10,6 +9,6 @@ class User < ActiveRecord::Base
     end
 
     def self.find_by_slug(slug)
-      self.all.find{|user| user.slug == slug}
+      self.all.find{|instance| instance.slug == slug}
     end
   end

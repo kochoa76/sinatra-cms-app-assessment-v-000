@@ -1,5 +1,4 @@
 class Gift < ActiveRecord::Base
-
   belongs_to :user
   validates_presence_of :name, :description
   validates_uniqueness_of :name
@@ -9,6 +8,6 @@ class Gift < ActiveRecord::Base
   end
 
   def self.find_by_slug(slug)
-    self.all.find{|name| name.slug == slug}
+    self.all.find{|instance| instance.slug == slug}
   end
 end

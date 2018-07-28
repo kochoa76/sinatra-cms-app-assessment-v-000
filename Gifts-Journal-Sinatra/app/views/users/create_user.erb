@@ -1,8 +1,5 @@
 
 <h2> Please Create Account Below: </h2>
-<% unless locals.empty? %>
-  <%= message %>
-<% end %>
 
 <form action="/users" method="POST">
   <p>Name: <input type="text" name="user[username]"></p>

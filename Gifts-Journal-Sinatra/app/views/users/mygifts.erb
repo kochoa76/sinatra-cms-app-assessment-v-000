@@ -4,18 +4,20 @@
   <br>
 Add it to your list for that next time your ready to make a purchase, or share it with others! </p>
 
-<h4> Your Desired Gifts: </h4>
-
-<% @gifts.each do |gift| %>
+<%= @user.username %>'s Gifts:
+<ul>
+<% @user.gifts.each do |gift| %>
   <div>
-    <a href="/gifts/<%=gift.slug%>"><%= gift.name %></a>
+    <li><a href="/gifts/<%= gift.slug %>"><%= gift.name %></a></li>
   </div>
 <% end %>
-
+</ul>
 <br></br>
-
-<a href="/gifts/create_gift"> Add a Gift </a>
-<br>
-<a href="/"> Home </a>
-<br>
-<a href="/logout"> Log Out </a>
+<p><a href="/gifts">All Gifts</a></p>
+<% if !logged_in? %>
+  <p><a href="/login">Log In</a></p>
+<% else %>
+  <p><a href="/gifts/create_gift">Add Gift</a></p>
+  <p><a href="/logout">Log Out</a></p>
+<% end %>
+<p><a href="/">Home</a></p>

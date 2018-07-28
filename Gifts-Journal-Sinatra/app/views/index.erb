@@ -2,12 +2,10 @@
     <h2>Welcome to Gift Journal!</h2>
     <div class="content">
       <p> Gift Journal allows you to keep track of your desired gifts or wishes, much like a journal, and share your list with others!</p>
-      <p>Please see your options below to get started:</p>
+      <p>Please sign up or log in to get started:</p>
       <nav>
           <div class="content">
          <% if !logged_in? %>
-           <p>Welcome!</p>
-           <p><a href="/gifts">All Gifts</a></p>
            <p><a href="/login">Log In</a></p>
            <p><a href="/signup">Sign Up</a></p>
          <% else %>
