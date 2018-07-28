@@ -1,16 +1,11 @@
-require 'pry'
-<h1>All Gifts:</h1>
-<% @gifts.each do |gift| %>
-binding.pry
-  <ul>
-    <a href="/gifts/<%= gift.slug %>"><%= gift.name %></a> by <a href="/users/<%= @user.slug %>"><%= @user.username if @user %></a>
-<<<<<<< HEAD
 
-=======
-    binding.pry
->>>>>>> 1f0aee43334dd184c07b226f83e72422746ebec6
-  </ul>
-<% end %>
+<h1>All Gifts:</h1>
+
+
+<% @gifts.each do |gift| %>
+<li><a href="/gifts/<%= gift.slug %>"><%= gift.name %></a></li>
+<%end%>
+
 
 <br></br>
 <p><a href="/gifts/create_gift">Add Gift</a></p>
@@ -19,7 +14,7 @@ binding.pry
   <p><a href="/login">Log In</a></p>
 <% else %>
   <p><a href="/users/<%= current_user.slug %>/gifts">My Gifts</a></p>
-  <p><a href="/users/<%= current_user.slug %>">My Profile</a></p>
+  <p><a href="/users/<%= current_user.slug %>">My Account</a></p>
   <p><a href="/logout">Log Out</a></p>
 <% end %>
 <p><a href="/">Home</a></p>

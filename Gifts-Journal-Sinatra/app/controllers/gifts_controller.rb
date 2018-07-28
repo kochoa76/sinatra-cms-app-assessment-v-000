@@ -18,9 +18,7 @@ class GiftsController < ApplicationController
   get '/gifts' do
     if logged_in?
       @gifts = Gift.all
-      @gift = Gift.find_by_slug(params[:slug])
-      @user =@gift.user
-         erb :'/gifts/index'
+      erb :'/gifts/index'
     else
         redirect to '/login'
      end
@@ -47,8 +45,8 @@ class GiftsController < ApplicationController
   end
 
   get "/gifts/:slug" do
-      @gift = Gift.find_by_slug(params[:slug])
-      @user = @gift.user
+    @gift = Gift.find_by_slug(params[:slug])
+    @user = @gift.user
       erb :"/gifts/show_gift"
   end
 
